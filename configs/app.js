@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { config } from 'dotenv'
 import userRoutes from './../src/user/user.routes.js';
+import taskRoutes from './../src/task/task.routes.js';
 
 //configuracion
 const app = express();
@@ -19,6 +20,7 @@ app.use(morgan('dev'));
 
 //Declaracion de rutas
 app.use('/user', userRoutes);
+app.use('/task', taskRoutes);
 
 export const initServer = ()=>{
     app.listen(port);

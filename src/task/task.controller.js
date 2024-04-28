@@ -14,6 +14,7 @@ export const create = async (req, res) => {
 
         if (!data || Object.entries(data).length == 0) return res.status(400).send({ message: `Empty data` });
 
+        data.user = req.user._id;
         let task = new Task(data);
         await task.save()
         return res.send({ message: `Task created successfully` });
@@ -41,7 +42,7 @@ export const modify = async (req, res) => {
         if (!data || Object.entries(data).length == 0) return res.status(400).send({ mesage: `Empty data` });
 
         if (
-            data.name == '' ||
+            data.title == '' || 
             data.startDate == '' ||
             data.status == '' ||
             data.user == ''
@@ -66,8 +67,7 @@ export const modify = async (req, res) => {
 export const deleteTask = async(req, res)=>{
     try {
         let {id} = req.params;
-
-        let task = await findOneAndDelete({_id: id});
+        let task = await Task.findOneAndDelete({_id: id});
         if(!task) return res.status(404).send({message: `Task not found`});
         return res.send({message: `Task deleted successfully`});
     } catch (err) {

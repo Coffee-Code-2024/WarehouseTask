@@ -9,6 +9,8 @@ const api = Router();
 //=======================//
 
 api.post('/create', [validateJwt], create);
-api.get('/get', [validateJwt], get);
-api.put('/modify', [validateJwt], modify);
-api.delete('/delete', [validateJwt], deleteTask);
+api.get('/', [validateJwt], get);
+api.put('/modify/:id', [validateJwt], modify);
+api.delete('/delete/:id', [validateJwt], deleteTask);
+
+export default api;

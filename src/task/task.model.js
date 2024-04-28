@@ -1,11 +1,11 @@
 'use strict'
 
-import { Schema, model } from mongoose
+import { Schema, model } from 'mongoose'
 
 const taskSchema = Schema({
-    name: {
+    title: {
         type: String,
-        required: [true, 'Name is required.']
+        required: [true, 'Title is required.']
     },
     description:{
         type: String
@@ -20,6 +20,7 @@ const taskSchema = Schema({
     status:{
         type: String,
         uppercase: true,
+        default: 'DOING',
         enum: ['DOING', 'DONE', 'TO-DO']
     },
     user:{
@@ -27,6 +28,8 @@ const taskSchema = Schema({
         ref: 'User',
         required: [true, 'User is required']
     }
-})
+},{
+    versionKey: false
+});
 
 export default model('Task', taskSchema);
