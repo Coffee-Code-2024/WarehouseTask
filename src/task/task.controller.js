@@ -15,6 +15,7 @@ export const create = async (req, res) => {
         if (!data || Object.entries(data).length == 0) return res.status(400).send({ message: `Empty data` });
 
         data.user = req.user._id;
+        console.log(data.user)
         let task = new Task(data);
         await task.save()
         return res.send({ message: `Task created successfully` });
