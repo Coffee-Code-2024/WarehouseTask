@@ -27,7 +27,7 @@ export const create = async (req, res) => {
 
 export const get = async (req, res) => {
     try {
-        let tasks = await Task.find();
+        let tasks = await Task.find().populate('user', ['name', 'surname']).sort({ endDate: 1 });
         return res.send({ tasks });
     } catch (err) {
         console.error(err);
