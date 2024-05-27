@@ -18,7 +18,8 @@ export const create = async (req, res) => {
         console.log(data.user)
         let task = new Task(data);
         await task.save()
-        return res.send({ message: `Task created successfully` });
+        task = await Task.findOne({_id: task._id}).populate('user', ['name', 'surname'])
+        return res.send({ message: `Task created successfully`, task});
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: `Error creating task`, err });
